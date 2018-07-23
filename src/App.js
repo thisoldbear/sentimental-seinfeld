@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import { AZURE_API_KEY } from './config';
 
-import './App.css';
-
 class App extends Component {
   state = {
     author: null,
@@ -53,11 +51,29 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Sentimental Seinfeld</h1>
-        <p>{this.state.quote}</p>
-        <p><em>{this.state.author}</em></p>
-        <p>Score: {this.state.score} / 100 </p>
+      <div className="app">
+        <div className="logo">
+          <span className="logo__sent">Sentimental</span>
+          <span className="logo__sein">
+            Se<span className="logo__i">1</span>nfeld
+          </span>
+        </div>
+        <div className="quote">
+          {this.state.score ? (
+              <React.Fragment>
+                <p><span className="quote__mark">"</span><em>{this.state.quote}</em><span className="quote__mark">"</span></p>
+                <p><strong>{this.state.author}</strong></p>
+                <p>Sentiment: <strong>{this.state.score} / 100</strong></p>
+              </React.Fragment>
+            ) : (
+              <p>Fetching and analysing a quote...</p>
+            )}
+          </div>
+          <div className="footer">
+            <p>Quotes from the <a href="https://seinfeld-quotes.herokuapp.com/">Seinfeld Quotes API</a></p>
+            <p>Sentiment score from <a href="https://docs.microsoft.com/en-gb/azure/cognitive-services/text-analytics/">Azure Cognitive Services Text Analytics</a></p>
+            <p>View on <a href="https://github.com/thisoldbear/sentimental-seinfeld">Github</a></p>
+          </div>
       </div>
     );
   }
